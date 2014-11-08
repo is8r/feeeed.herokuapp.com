@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(function() {
+$( document ).on('ready page:load', function() {
   $('.js-dropdown-trigger', '.topbar').on('click', function(e) {
     e.preventDefault();
     var $el = $(e.currentTarget);
