@@ -8,18 +8,29 @@
   .topbar__inner
     +clearfix
   .topbar__title
-    text-align: center
+    a
+      display: block
+      height: 50px
+      text-indent: -200%
+      cursor: default
   .topbar__icon
-    +inline-block
-    +icon-feeeed(20px)
+    +icon-feeeed(32px)
+    display: block
+    text-align: center
     text-decoration: none
     color: #000
-    width: 38px
-    height: 38px
+    width: 100%
     overflow: hidden
     &:before
       +animation(anim-icon-turn-return 0.6s ease-out)
-      margin-top: 15px
+      cursor: pointer
+      position: absolute
+      top: 0
+      left: 50%
+      text-indent: 0
+      width: 40px
+      margin-top: 8px
+      margin-left: -20px
     &.is-open
       &:before
         +animation(anim-icon-turn 0.6s ease-out)
@@ -43,11 +54,14 @@
       margin-top: 30px
       p
         +font(12px)
-        font-style: italic
         text-align: left
         color: rgba(#fff, 0.6)
         width: 260px
         margin: 0 auto
+        b
+          font-weight: bold
+      p.italic
+        font-style: italic
     .topbar__sites
       width: 260px
       margin: 0 auto
@@ -58,6 +72,7 @@
           +font(12px)
           +transition(color 0.2s ease-out)
           text-align: left
+          font-style: italic
           text-decoration: none
           color: rgba(#fff, 0.6)
           &:hover
