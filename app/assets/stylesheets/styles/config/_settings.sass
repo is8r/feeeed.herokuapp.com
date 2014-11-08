@@ -26,6 +26,27 @@ $break-point: $contents-width
   font-weight: $weight
   line-height: $line-height
 
++font-face-rails('feeeed', 'fontello/fontello')
+=font-feeeed($size: 1em, $line-height: normal, $weight: normal, $family: 'sans')
+  font-family: 'feeeed'
+  font-size: $size
+  font-weight: $weight
+  line-height: $line-height
+
+=icon-fontello
+  +inline-block
+  speak: none
+  text-decoration: inherit
+  width: 1em
+  text-align: center
+  font-variant: normal
+  text-transform: none
+=icon-feeeed($size: 1em)
+  &:before
+    +icon-fontello
+    +font-feeeed($size)
+    content: "\e800"
+
 // setting animations
 
 // +animation(anim-topbar-bg 0.6s ease-out)
@@ -50,83 +71,16 @@ $break-point: $contents-width
     width: 100%
     height: 50px
 
-// +animation(anim-topbar-trigger0 0.6s ease-out)
-+keyframes(anim-topbar-trigger0)
+// +animation(anim-icon-turn 0.6s ease-out)
++keyframes(anim-icon-turn)
   0%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 40%
-  50%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  70%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
+    +rotate(0deg)
   100%
-    +transform(translateX(-50%) translateY(-50%) rotate(45deg))
-    top: 50%
-+keyframes(anim-topbar-trigger1)
-  0%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  50%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  70%
-    top: 50%
-    +transform(translateX(-50%) translateY(-50%))
-  100%
-    +transform(translateX(-50%) translateY(-50%) scaleX(0))
-    top: 50%
-+keyframes(anim-topbar-trigger2)
-  0%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 60%
-  50%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  70%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  100%
-    +transform(translateX(-50%) translateY(-50%) rotate(-45deg))
-    top: 50%
+    +rotate(180deg)
 
-+keyframes(anim-topbar-trigger0-return)
+// +animation(anim-icon-turn-return 0.6s ease-out)
++keyframes(anim-icon-turn-return)
   0%
-    +transform(translateX(-50%) translateY(-50%) rotate(45deg))
-    top: 50%
-  50%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  70%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
+    +rotate(180deg)
   100%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 40%
-+keyframes(anim-topbar-trigger1-return)
-  0%
-    +transform(translateX(-50%) translateY(-50%) scaleX(0))
-    top: 50%
-  50%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  70%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  100%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-+keyframes(anim-topbar-trigger2-return)
-  0%
-    +transform(translateX(-50%) translateY(-50%) rotate(-45deg))
-    top: 50%
-  50%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  70%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 50%
-  100%
-    +transform(translateX(-50%) translateY(-50%))
-    top: 60%
+    +rotate(360deg)

@@ -30,11 +30,12 @@ module FeeeedV2
       app.config.assets.precompile.push(Proc.new do |path|
         File.extname(path).in? [
           '.html', '.erb', '.haml',                 # Templates
-          '.sass', '.scss',                         # Templates
+          '.sass', '.scss',                         # Styles
           '.png',  '.gif', '.jpg', '.jpeg',         # Images
           '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
         ]
       end)
     end
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

@@ -1,7 +1,7 @@
 .topbar.js-topbar
   .topbar__inner
     %h1.topbar__title
-      = link_to root_path do
+      = link_to root_path,{class: 'topbar__icon js-dropdown-trigger'} do
         FEEEED
     .top__overlay
       %p
@@ -23,7 +23,3 @@
           %li
             = link_to posts_path do
               posts
-    %span.topbar__trigger-icon.js-dropdown-trigger
-      %span
-      %span
-      %span

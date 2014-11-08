@@ -8,13 +8,23 @@
   .topbar__inner
     +clearfix
   .topbar__title
-    +font(16px)
     text-align: center
-    a
-      +inline-block
-      text-decoration: none
-      color: #000
-      padding: 14px 0
+  .topbar__icon
+    +inline-block
+    +icon-feeeed(20px)
+    text-decoration: none
+    color: #000
+    width: 38px
+    height: 38px
+    overflow: hidden
+    &:before
+      +animation(anim-icon-turn-return 0.6s ease-out)
+      margin-top: 15px
+    &.is-open
+      &:before
+        +animation(anim-icon-turn 0.6s ease-out)
+        +rotate(180deg)
+
   .top__overlay
     display: none
   &.is-open
@@ -35,7 +45,7 @@
         +font(12px)
         font-style: italic
         text-align: left
-        color: rgba(#fff, 0.3)
+        color: rgba(#fff, 0.6)
         width: 260px
         margin: 0 auto
     .topbar__sites
@@ -49,9 +59,9 @@
           +transition(color 0.2s ease-out)
           text-align: left
           text-decoration: none
-          color: rgba(#fff, 0.3)
+          color: rgba(#fff, 0.6)
           &:hover
-            color: rgba(#fff, 0.6)
+            color: rgba(#fff, 0.9)
     .topbar__lists
       text-align: center
       margin-top: 20px
@@ -63,52 +73,4 @@
           color: #fff
           text-decoration: none
           text-transform: uppercase
-
-.topbar__trigger-icon
-  position: relative
-  width: 50px
-  height: 50px
-  position: absolute
-  top: 0
-  left: 0
-  cursor: pointer
-  > span
-    +inline-block
-    position: absolute
-    width: 14px
-    height: 2px
-    background: #000
-    &:nth-child(1)
-      +animation(anim-topbar-trigger0-return 0.4s ease-out)
-      +transform(translateX(-50%) translateY(-50%))
-      top: 40%
-      left: 50%
-    &:nth-child(2)
-      +animation(anim-topbar-trigger1-return 0.4s ease-out)
-      +transform(translateX(-50%) translateY(-50%))
-      top: 50%
-      left: 50%
-    &:nth-child(3)
-      +animation(anim-topbar-trigger2-return 0.4s ease-out)
-      +transform(translateX(-50%) translateY(-50%))
-      top: 60%
-      left: 50%
-  &.is-open
-    > span
-      background: #fff
-      &:nth-child(1)
-        +animation(anim-topbar-trigger0 0.4s ease-out)
-        +transform(translateX(-50%) translateY(-50%) rotate(45deg))
-        top: 50%
-        left: 50%
-      &:nth-child(2)
-        +animation(anim-topbar-trigger1 0.4s ease-out)
-        +transform(translateX(-50%) translateY(-50%) scaleX(0))
-        top: 50%
-        left: 50%
-      &:nth-child(3)
-        +animation(anim-topbar-trigger2 0.4s ease-out)
-        +transform(translateX(-50%) translateY(-50%) rotate(-45deg))
-        top: 50%
-        left: 50%
 
