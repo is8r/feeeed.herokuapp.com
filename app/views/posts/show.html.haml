@@ -1,0 +1,28 @@
+.scaffold
+  %p#notice= notice
+
+  %p
+    %b Title:
+    = @post.title
+  %p
+    %b Description:
+    = @post.description
+  %p
+    %b Url:
+    = @post.url
+  %p
+    %b UrlOriginal:
+    = @post.url_original
+  %p
+    %b Posted at:
+    = @post.posted_at
+  %p
+    %b Image url:
+    = @post.image_url
+  %p
+    %b SiteId:
+    = @post.site_id
+
+  = link_to 'Edit', edit_post_path(@post)
+  \|
+  = link_to 'Back', posts_path

@@ -1,0 +1,132 @@
+// site property
+
+$color-def: #111
+$color-gray: #ddd
+$color-accent: #E87571
+
+$border-color: #dedede
+$border-line: solid 1px $border-color
+$border-dot: dotted 1px $border-color
+
+$contents-width: 640px
+$contents-learge-width-margin: 50px
+$break-point: $contents-width
+
+// setting mixins
+
++import-opensans
++import-fa
++selection(#555, transparent)
++margin-set
+
+// web font
+=font($size: 1em, $line-height: normal, $weight: normal, $family: 'sans')
+  font-family: 'Open Sans', $sans
+  font-size: $size
+  font-weight: $weight
+  line-height: $line-height
+
+// setting animations
+
+// +animation(anim-topbar-bg 0.6s ease-out)
++keyframes(anim-topbar-bg)
+  0%
+    background: rgba(#000, 0)
+  100%
+    background: rgba(#000, 0.8)
+
+// +animation(anim-topbar-bg-return 0.6s ease-out)
++keyframes(anim-topbar-bg-return)
+  0%
+    background: rgba(#000, 0.8)
+    width: 100%
+    height: 100%
+  99%
+    background: rgba(#000, 0)
+    width: 100%
+    height: 100%
+  100%
+    background: rgba(#000, 0)
+    width: 100%
+    height: 50px
+
+// +animation(anim-topbar-trigger0 0.6s ease-out)
++keyframes(anim-topbar-trigger0)
+  0%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 40%
+  50%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  70%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  100%
+    +transform(translateX(-50%) translateY(-50%) rotate(45deg))
+    top: 50%
++keyframes(anim-topbar-trigger1)
+  0%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  50%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  70%
+    top: 50%
+    +transform(translateX(-50%) translateY(-50%))
+  100%
+    +transform(translateX(-50%) translateY(-50%) scaleX(0))
+    top: 50%
++keyframes(anim-topbar-trigger2)
+  0%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 60%
+  50%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  70%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  100%
+    +transform(translateX(-50%) translateY(-50%) rotate(-45deg))
+    top: 50%
+
++keyframes(anim-topbar-trigger0-return)
+  0%
+    +transform(translateX(-50%) translateY(-50%) rotate(45deg))
+    top: 50%
+  50%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  70%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  100%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 40%
++keyframes(anim-topbar-trigger1-return)
+  0%
+    +transform(translateX(-50%) translateY(-50%) scaleX(0))
+    top: 50%
+  50%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  70%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  100%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
++keyframes(anim-topbar-trigger2-return)
+  0%
+    +transform(translateX(-50%) translateY(-50%) rotate(-45deg))
+    top: 50%
+  50%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  70%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 50%
+  100%
+    +transform(translateX(-50%) translateY(-50%))
+    top: 60%

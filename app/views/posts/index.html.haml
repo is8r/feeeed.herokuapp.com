@@ -1,0 +1,106 @@
+:javascript
+  $(function() {
+
+    //scrape
+    $('.js-scrape-ajax').on('click', function(e) {
+      e.preventDefault();
+      getJson($(e.currentTarget));
+    });
+    function getJson($el) {
+      if($el.hasClass('is-loading')) return;
+
+      var url = $el.attr('href') + '/' + $el.attr('action');
+      $el.addClass('is-loading');
+
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json'
+      })
+      .done(function(e) {
+        console.log("success:", e, e[8]);
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        $el.removeClass('is-loading');
+      });
+    }
+
+    //rewrite
+    $('.js-rewrite-ajax').on('click', function(e) {
+      e.preventDefault();
+      getRewrite($(e.currentTarget));
+    });
+    function getRewrite($el) {
+      if($el.hasClass('is-loading')) return;
+
+      var url = $el.attr('href') + '/' + $el.attr('action');
+      $el.addClass('is-loading');
+
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json'
+      })
+      .done(function(e) {
+        console.log("success:", e, e[0]);
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        $el.removeClass('is-loading');
+      });
+    }
+
+  });
+
+
+.scaffold
+  %h1
+    Listing posts (
+    = Post.count
+    )
+
+  = link_to posts_path, action: :scrape, class: 'button js-scrape-ajax' do
+    scrape schedule
+
+  = link_to posts_path, action: :rewrite, class: 'button js-rewrite-ajax' do
+    rewrite
+
+  %table
+    %tr
+      %th Image
+      %th Data
+      %th
+      %th
+      %th
+
+    - @posts.each do |post|
+      %tr
+        %td
+          = link_to post.url_original, {target: '_blank'} do
+            = image_tag post.image_url
+        %td
+          - if post.url != ''
+            = link_to post.url, {target: '_blank'} do
+              = post.title
+          - elsif post.title != ''
+            = post.title
+          = link_to post.url_original, {target: '_blank'} do
+            [direct link]
+          %br
+          = link_to_site_id post.site
+          %br
+          = foo_time post.posted_at
+        %td= link_to 'Show', post
+        %td= link_to 'Edit', edit_post_path(post)
+        %td= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  = paginate @posts
+
+  %br
+
+  = link_to 'New Post', new_post_path

@@ -1,0 +1,22 @@
+@import "vendor/spuit/addons/_reset"
+@import "vendor/spuit/_all"
+
+@import "styles/config/_settings"
+@import "styles/config/_base"
+@import "styles/config/_layouts"
+
+@import "styles/modules/_topbar"
+@import "styles/modules/_top-grids"
+@import "styles/modules/_pagination"
+@import "styles/modules/_badge"
+
+.admin
+  padding: 0 50px 50px 50px
+
+.body
+  +body
+  margin-top: 30px
+
+.scaffold
+  +scaffold($color-accent)
+  margin-top: 40px

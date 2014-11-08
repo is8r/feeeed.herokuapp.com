@@ -1,0 +1,26 @@
+- @body_class = 'admin scaffold'
+
+%p#notice= notice
+
+%p
+  %b Name:
+  = @site.name
+%p
+  %b Url:
+  = @site.url
+%p
+  %b Rss:
+  = @site.rss
+%p
+  %b Active:
+  = @site.active
+%p
+  %b Posts:
+  %ul
+    - @site.posts.each do |i|
+      %li
+        = i.id
+
+= link_to 'Edit', edit_site_path(@site)
+\|
+= link_to 'Back', sites_path

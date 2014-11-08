@@ -1,0 +1,29 @@
+.topbar.js-topbar
+  .topbar__inner
+    %h1.topbar__title
+      = link_to root_path do
+        FEEEED
+    .top__overlay
+      %p
+        FEEEEDはWEBデザインのアワードやインスピレーション系のギャラリーのrssを纏めたアンテナサイトです。
+      .mt10
+      %p
+        Link:
+      %ul.topbar__sites
+        - @sites.each do |site|
+          %li
+            = link_to site.url, {target: '_blank'} do
+              = site.name
+
+      - if Rails.env.development?
+        %ul.topbar__lists
+          %li
+            = link_to sites_path do
+              sites
+          %li
+            = link_to posts_path do
+              posts
+    %span.topbar__trigger-icon.js-dropdown-trigger
+      %span
+      %span
+      %span

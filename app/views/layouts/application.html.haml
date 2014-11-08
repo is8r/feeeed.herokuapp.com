@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    = render partial: 'layouts/meta'
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = favicon_link_tag '/favicon.ico'
+
+    = analytics_init if Rails.env.production?
+    = csrf_meta_tags
+  %body{:class => @body_class || controller.controller_name}
+    = yield

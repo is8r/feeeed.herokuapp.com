@@ -1,0 +1,22 @@
+= render partial: '/layouts/topbar'
+
+%ul.top-grids
+  - @posts.each do |post|
+    - badge = ''
+    - if post.site_id == 1
+      - badge = 'badge--awrd'
+    - if post.site_id == 3
+      - badge = 'badge--fwa'
+    - style = 'background-image: url('+post.image_url+')'
+    %li{'style' => style, class: badge}
+      .top-grids__overlay
+        = link_to post.url, {target: '_blank', class: 'top-grids__link-text'} do
+          = post.title
+          %span
+            = post.site.name
+          %span
+            = foo_time post.posted_at
+        = link_to post.url_original, {target: '_blank', class: 'top-grids__link-icon'} do
+          %i
+
+= paginate @posts

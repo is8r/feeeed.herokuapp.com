@@ -1,0 +1,56 @@
+.top-grids
+  padding-top: 50px
+  +split(5, 0)
+  > li
+    position: relative
+    display: block
+    background-position: center center
+    background-repeat: no-repeat
+    // background-size: 140% auto
+    background-size: cover
+    height: 160px
+  .top-grids__overlay
+    position: relative
+    display: block
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0.8)
+    +opacity(0)
+    &:hover
+      +opacity(1)
+      +transition(opacity 0.2s ease-out)
+  .top-grids__link-text
+    +inline-block
+    +font(10px)
+    position: absolute
+    left: 0
+    top: 0
+    // background: #fff
+    color: #fff
+    text-decoration: none
+    padding: 2px 5px 0
+    margin: 0
+    vertical-align: top
+    span
+      display: block
+      font-style: italic
+      color: #666
+  .top-grids__link-icon
+    display: block
+    width: 100%
+    height: 100%
+    i
+      +icon-disc('\f178', 50px, 18px, transparent)
+      +vertical-align
+      &:before
+        border: 1px solid rgba(#fff, 0.2)
+  +break-points(mobile)
+    +split(2, 0)
+    > li
+      display: block
+      background-position: center center
+      background-repeat: no-repeat
+      // background-size: 120% auto
+      height: 120px
+
+

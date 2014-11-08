@@ -1,0 +1,64 @@
+- @body_class = 'admin scaffold'
+
+:javascript
+  $(function() {
+
+    //jquery ajax
+    $('.js-sync-ajax').on('click', function(e) {
+      e.preventDefault();
+      getJson($(e.currentTarget));
+    });
+    function getJson($el) {
+      if($el.hasClass('is-loading')) return;
+
+      var url = $el.attr('href') + '/' + $el.attr('action');
+      $el.addClass('is-loading');
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json'
+      })
+      .done(function(e) {
+        console.log("success:", e, e[0]);
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        $el.removeClass('is-loading');
+      });
+    }
+
+  });
+
+%h1 Listing sites
+
+= link_to sites_path, action: :sync, class: 'button js-sync-ajax' do
+  sync spredsheets
+
+%table
+  %tr
+    %th Name
+    %th Url,Rss
+    %th Active
+    %th
+    %th
+    %th
+
+  - @sites.each do |site|
+    %tr
+      %td= site.name
+      %td
+        = site.url
+        %br
+        = site.rss
+      %td= site.active
+      %td= link_to 'Show', site
+      %td= link_to 'Edit', edit_site_path(site)
+      %td= link_to 'Destroy', site, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= paginate @sites
+
+%br
+
+= link_to 'New Site', new_site_path
