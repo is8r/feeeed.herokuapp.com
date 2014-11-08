@@ -19,5 +19,3 @@
 # Ignore application configuration
 /config/application.yml
 
-/app/assets/stylesheets/vendor/spuit/.git/
-/app/assets/stylesheets/vendor/spuit/.gitignore
