@@ -25,25 +25,63 @@
     position: absolute
     left: 0
     top: 0
-    // background: #fff
-    color: #fff
+    color: #ccc
     text-decoration: none
     padding: 2px 5px 0
-    margin: 0
+    margin: 10px
     vertical-align: top
     span
       display: block
       font-style: italic
       color: #666
+    &:hover
+      color: #fff
+      span
+        display: block
+        font-style: italic
+        color: #999
+
   .top-grids__link-icon
     display: block
     width: 100%
     height: 100%
     i
-      +icon-disc('\f178', 50px, 18px, transparent)
+      +border-radius(50px)
+      +inline-block
       +vertical-align
+      +fa-icon('\f178', 18px, 'before')
+      +fa-icon('\f178', 18px, 'after')
+      position: relative
+      border: 1px solid rgba(#fff, 0.2)
+      width: 50px
+      height: 50px
+      color: #fff
+      overflow: hidden
+      &:before,
+      &:after
+        overflow: hidden
+        position: absolute
+        top: 50%
+        left: 50%
+        width: 50px
+        height: 50px
+        margin-top: -25px
+        margin-left: -25px
+        text-align: center
+        line-height: 50px
       &:before
-        border: 1px solid rgba(#fff, 0.2)
+        +translateX(0px)
+      &:after
+        +translateX(-50px)
+    &:hover
+      i
+        &:before
+          +transition(transform 0.2s 0.1s ease-out)
+          +translateX(50px)
+        &:after
+          +transition(transform 0.2s 0.1s ease-out)
+          +translateX(0px)
+
   +break-points(mobile)
     +split(2, 0)
     > li
