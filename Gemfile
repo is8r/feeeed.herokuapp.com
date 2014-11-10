@@ -55,6 +55,8 @@ gem 'meta-tags', :require => 'meta_tags'
 gem 'jquery-ui-rails'
 gem 'underscore-rails'
 gem 'jquery-easing-rails'
+gem 'nprogress-rails'
+
 # gem 'devise'
 # gem 'redcarpet'# markdown
 # gem 'paperclip', '~> 4.2'# upload
