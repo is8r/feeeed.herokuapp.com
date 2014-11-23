@@ -1,0 +1,91 @@
+// site property
+
+$color-def: #111
+$color-gray: #ddd
+$color-accent: #E87571
+
+$border-color: #dedede
+$border-line: solid 1px $border-color
+$border-dot: dotted 1px $border-color
+
+$contents-width: 640px
+$contents-learge-width-margin: 50px
+$break-point: $contents-width
+
+// setting mixins
+
++import-opensans
++import-fa
++selection(#555, transparent)
++margin-set
+
+// web font
+=font($size: 1em, $line-height: normal, $weight: normal, $family: 'sans')
+  font-family: 'Open Sans', $sans
+  font-size: $size
+  font-weight: $weight
+  line-height: $line-height
+
++font-face('feeeed', 'fonts/fontello/fontello')
+=font-feeeed($size: 1em, $line-height: normal, $weight: normal, $family: 'sans')
+  font-family: 'feeeed'
+  font-size: $size
+  font-weight: $weight
+  line-height: $line-height
+
+=icon-fontello
+  +inline-block
+  speak: none
+  text-decoration: inherit
+  width: 1em
+  text-align: center
+  font-variant: normal
+  text-transform: none
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  -webkit-backface-visibility: hidden
+  backface-visibility: hidden
+  overflow: hidden
+=icon-feeeed($size: 1em)
+  &:before
+    +icon-fontello
+    +font-feeeed($size)
+    content: "\e800"
+
+// setting animations
+
+// +animation(anim-topbar-bg 0.6s ease-out)
++keyframes(anim-topbar-bg)
+  0%
+    background: rgba(#000, 0)
+  100%
+    background: rgba(#000, 0.8)
+
+// +animation(anim-topbar-bg-return 0.6s ease-out)
++keyframes(anim-topbar-bg-return)
+  0%
+    background: rgba(#000, 0.8)
+    width: 100%
+    height: 100%
+  99%
+    background: rgba(#000, 0)
+    width: 100%
+    height: 100%
+  100%
+    background: rgba(#000, 0)
+    width: 100%
+    height: 50px
+
+// +animation(anim-icon-turn 0.6s ease-out)
++keyframes(anim-icon-turn)
+  0%
+    +rotate(0deg)
+  100%
+    +rotate(180deg)
+
+// +animation(anim-icon-turn-return 0.6s ease-out)
++keyframes(anim-icon-turn-return)
+  0%
+    +rotate(180deg)
+  100%
+    +rotate(360deg)
