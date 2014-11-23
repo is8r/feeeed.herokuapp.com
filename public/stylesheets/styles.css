@@ -604,8 +604,8 @@ table {
   margin-bottom: 100px; }
 @font-face {
   font-family: "feeeed";
-  src: font-url("fontello/fontello.eot");
-  src: font-url("fontello/fontello.eot?iefix") format("eot"), font-url("fontello/fontello.woff") format("woff"), font-url("fontello/fontello.ttf") format("truetype"), font-url("fontello/fontello.svg#font") format("svg"); }
+  src: url("fonts/fontello/fontello.eot");
+  src: url("fonts/fontello/fontello.eot?iefix") format("eot"), url("fonts/fontello/fontello.woff") format("woff"), url("fonts/fontello/fontello.ttf") format("truetype"), url("fonts/fontello/fontello.svg#font") format("svg"); }
 @-webkit-keyframes anim-topbar-bg {
   0% {
     background: transparent; }
