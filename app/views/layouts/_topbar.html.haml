@@ -19,6 +19,10 @@
           %li
             = link_to site.url, {target: '_blank'} do
               = site.name
+      .mt10
+      %p.italic
+        = Post.count
+        sites posted.
 
       - if Rails.env.development?
         %ul.topbar__lists
