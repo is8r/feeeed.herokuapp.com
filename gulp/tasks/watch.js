@@ -47,8 +47,8 @@ gulp.task('scripts', function() {
     .pipe(concat('scripts.min.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('public/javascripts'))
-    .pipe(reload({stream:true}));
+    .pipe(gulp.dest('public/javascripts'));
+    // .pipe(reload({stream:true}));
 });
 gulp.task('styles', function() {
   del(['public/stylesheets'], function(){});
@@ -57,23 +57,21 @@ gulp.task('styles', function() {
     .pipe(sass({sourcemapPath: '.'}))
     //.on('error', function (e) { console.log(e.message); })
     //.pipe(minifycss())
-    .pipe(gulp.dest('public/stylesheets'))
-    .pipe(reload({stream:true}));
+    .pipe(gulp.dest('public/stylesheets'));
+    // .pipe(reload({stream:true}));
 });
 gulp.task('html', function() {
   gulp.src(paths.copyElements)
     .pipe(plumber())
-    .pipe(gulp.dest('public'))
-    .pipe(reload({stream:true}));
+    .pipe(gulp.dest('public'));
+    // .pipe(reload({stream:true}));
 });
 
 gulp.task('watch', function() {
-  gulp.run('connect');
-  gulp.run('browserSync');
+  // gulp.run('connect');
+  // gulp.run('browserSync');
 
   gulp.watch([paths.scripts], ['scripts']);
   gulp.watch([paths.styles], ['styles']);
   gulp.watch([paths.copyElements], ['html']);
 });
-
-
