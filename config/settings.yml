@@ -1,11 +1,21 @@
-# meta
-site:
-  title: "Feeeed"
-  canonical: "https://feeeed.herokuapp.com/"
-  meta:
-    description: "Feeeed is design rss feeds site."
-    keywords: "design, rss"
-    og:
-      app_id: "239478872905869"
-      image: "https://feeeed.herokuapp.com/images/ogp.png"
-      type: "website"
+defaults: &defaults
+  # meta
+  site:
+    title: "Feeeed"
+    canonical: "https://feeeed.herokuapp.com/"
+    meta:
+      description: "Feeeed is design rss feeds site."
+      keywords: "design, rss"
+      og:
+        app_id: "239478872905869"
+        image: "https://feeeed.herokuapp.com/images/ogp.png"
+        type: "website"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
