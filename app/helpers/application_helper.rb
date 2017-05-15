@@ -1,7 +1,6 @@
 module ApplicationHelper
   include SeoHelper
   include ScrapeHelper
-  include ScrapeHelper
 
   # ApplicationController.helpers.foo_time Time.now
   def foo_time(datetime)
