@@ -1,8 +1,8 @@
-ruby '2.4.1'
+ruby '2.2.0'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.0'
+gem 'rails', '4.1.6'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -10,7 +10,7 @@ gem 'pg'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -56,7 +56,6 @@ gem 'jquery-ui-rails'
 gem 'underscore-rails'
 gem 'jquery-easing-rails'
 gem 'nprogress-rails'
-gem 'settingslogic'
 
 # gem 'devise'
 # gem 'redcarpet'# markdown
