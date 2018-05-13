@@ -187,11 +187,30 @@ module ScrapeHelper
   # 特定のサイトのPostsをリライト
   def test_rewrite_site_posts(id)
     re = []
-
     posts = Post.where(:site_id => id)
-    posts.each do |i|
-      rewrite_post_columns_images i
-    end
+
+    # count = 0
+    # posts.each do |i|
+    #   if i[:url_original].nil?
+    #     # if count < 1
+    #     #   puts i[:url]
+    #     #   puts get_original_url(i)
+    #     #   # rewrite_post_columns(i)
+    #     # end
+    #     # count += 1
+    #
+    #     puts get_original_url(i)
+    #     rewrite_post_columns(i)
+    #
+    #   end
+    # end
+
+    Parallel.each(posts, in_threads: 1000) {|i|
+      if i[:url_original].nil?
+        puts get_original_url(i)
+        rewrite_post_columns(i)
+      end
+    }
 
     re
   end
@@ -229,7 +248,8 @@ module ScrapeHelper
     if site_id == 1
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
-      doc.css('a.view-site').each do |i|
+      # doc.css('a.view-site').each do |i|
+      doc.xpath('//a[contains(text(), "Visit Site")]').each do |i|
         href = i.attribute('href').value
         re = href if href.present?
       end
@@ -299,7 +319,7 @@ module ScrapeHelper
     if site_id == 8
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
-      doc.css('.post-single .one-half')[0].css('.post a').each do |i|
+      doc.css('.post-single > a')[0].css('.post a').each do |i|
         href = i.attribute('href').value
         re = href if href.present?
       end
@@ -322,6 +342,7 @@ module ScrapeHelper
 
     re
   end
+
   def get_wririte_original_image(post)
     re = ''
     uri = post.url
