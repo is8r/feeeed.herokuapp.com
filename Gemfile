@@ -57,6 +57,7 @@ gem 'underscore-rails'
 gem 'jquery-easing-rails'
 gem 'nprogress-rails'
 gem 'settingslogic'
+gem 'responders'
 
 # gem 'devise'
 # gem 'redcarpet'# markdown
