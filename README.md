@@ -1,6 +1,6 @@
 ```
 $ heroku pg:backups capture --app feeeed
-$ heroku pg:backups
+$ heroku pg:backups --app feeeed
 $ curl -o db/latest.dump $(heroku pg:backups public-url b001 --app feeeed)
 ```
 

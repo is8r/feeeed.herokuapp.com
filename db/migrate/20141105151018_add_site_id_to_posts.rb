@@ -1,4 +1,4 @@
-class AddSiteIdToPosts < ActiveRecord::Migration
+class AddSiteIdToPosts < ActiveRecord::Migration[4.2]
   def self.up
     add_column(:posts, :site_id, :integer)
     add_index(:posts, :site_id)
