@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,45 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331011209) do
+ActiveRecord::Schema.define(version: 2014_11_05_161231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
+  create_table "categories", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "clicks", force: true do |t|
-    t.integer  "count"
+  create_table "clicks", id: :serial, force: :cascade do |t|
+    t.integer "count"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "post_id"
+    t.integer "post_id"
+    t.index ["post_id"], name: "index_clicks_on_post_id"
   end
 
-  add_index "clicks", ["post_id"], name: "index_clicks_on_post_id", using: :btree
-
-  create_table "posts", force: true do |t|
-    t.text     "title"
-    t.text     "description"
-    t.text     "url"
+  create_table "posts", id: :serial, force: :cascade do |t|
+    t.text "title"
+    t.text "description"
+    t.text "url"
     t.datetime "posted_at"
-    t.text     "image_url"
+    t.text "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "site_id"
-    t.text     "url_original"
+    t.integer "site_id"
+    t.text "url_original"
+    t.index ["site_id"], name: "index_posts_on_site_id"
   end
 
-  add_index "posts", ["site_id"], name: "index_posts_on_site_id", using: :btree
-
-  create_table "sites", force: true do |t|
-    t.text     "name"
-    t.text     "url"
-    t.text     "rss"
-    t.boolean  "active"
+  create_table "sites", id: :serial, force: :cascade do |t|
+    t.text "name"
+    t.text "url"
+    t.text "rss"
+    t.boolean "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
