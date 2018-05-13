@@ -189,24 +189,22 @@ module ScrapeHelper
     re = []
     posts = Post.where(:site_id => id)
 
-    # count = 0
-    # posts.each do |i|
-    #   if i[:url_original].nil?
-    #     # if count < 1
-    #     #   puts i[:url]
-    #     #   puts get_original_url(i)
-    #     #   # rewrite_post_columns(i)
-    #     # end
-    #     # count += 1
-    #
-    #     puts get_original_url(i)
-    #     rewrite_post_columns(i)
-    #
-    #   end
-    # end
+    # check
+    count = 0
+    posts.each do |i|
+      if i[:url_original].nil?
+        if count < 2
+          puts i[:url]
+          puts get_original_url(i)
+        end
+        count += 1
+      end
+    end
 
+    # rewrite
     Parallel.each(posts, in_threads: 1000) {|i|
       if i[:url_original].nil?
+        puts i[:url]
         puts get_original_url(i)
         rewrite_post_columns(i)
       end
@@ -317,9 +315,13 @@ module ScrapeHelper
 
     # CSSDSGN
     if site_id == 8
+      unless post.url.include?('http')
+        uri = 'http:'+post.url
+      end
+
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
-      doc.css('.post-single > a')[0].css('.post a').each do |i|
+      doc.css('.post-single > a').each do |i|
         href = i.attribute('href').value
         re = href if href.present?
       end
