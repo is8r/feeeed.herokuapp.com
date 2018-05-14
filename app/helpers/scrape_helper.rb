@@ -189,17 +189,17 @@ module ScrapeHelper
     re = []
     posts = Post.where(:site_id => id)
 
-    # check
-    count = 0
-    posts.each do |i|
-      if i[:url_original].nil?
-        if count < 2
-          puts i[:url]
-          puts get_original_url(i)
-        end
-        count += 1
-      end
-    end
+    # # check
+    # count = 0
+    # posts.each do |i|
+    #   if i[:url_original].nil?
+    #     if count < 2
+    #       puts i[:url]
+    #       puts get_original_url(i)
+    #     end
+    #     count += 1
+    #   end
+    # end
 
     # rewrite
     Parallel.each(posts, in_threads: 1000) {|i|
@@ -209,6 +209,17 @@ module ScrapeHelper
         rewrite_post_columns(i)
       end
     }
+
+    # # いらないものを削除
+    # Parallel.each(posts, in_threads: 1000) {|i|
+    #   if i[:url_original].nil?
+    #     unless get_original_url(i).size > 1
+    #       i.destroy
+    #     end
+    #   else
+    #     i.destroy
+    #   end
+    # }
 
     re
   end
@@ -275,6 +286,10 @@ module ScrapeHelper
 
     # One Page Love
     if site_id == 4
+      unless post.url.include?('http')
+        uri = 'http:'+post.url
+      end
+
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
       doc.css('.review-launch a').each do |i|
