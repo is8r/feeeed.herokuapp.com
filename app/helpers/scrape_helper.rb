@@ -187,11 +187,39 @@ module ScrapeHelper
   # 特定のサイトのPostsをリライト
   def test_rewrite_site_posts(id)
     re = []
-
     posts = Post.where(:site_id => id)
-    posts.each do |i|
-      rewrite_post_columns_images i
-    end
+
+    # # check
+    # count = 0
+    # posts.each do |i|
+    #   if i[:url_original].nil?
+    #     if count < 2
+    #       puts i[:url]
+    #       puts get_original_url(i)
+    #     end
+    #     count += 1
+    #   end
+    # end
+
+    # rewrite
+    Parallel.each(posts, in_threads: 1000) {|i|
+      if i[:url_original].nil?
+        puts i[:url]
+        puts get_original_url(i)
+        rewrite_post_columns(i)
+      end
+    }
+
+    # # いらないものを削除
+    # Parallel.each(posts, in_threads: 1000) {|i|
+    #   if i[:url_original].nil?
+    #     unless get_original_url(i).size > 1
+    #       i.destroy
+    #     end
+    #   else
+    #     i.destroy
+    #   end
+    # }
 
     re
   end
@@ -229,7 +257,8 @@ module ScrapeHelper
     if site_id == 1
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
-      doc.css('a.view-site').each do |i|
+      # doc.css('a.view-site').each do |i|
+      doc.xpath('//a[contains(text(), "Visit Site")]').each do |i|
         href = i.attribute('href').value
         re = href if href.present?
       end
@@ -257,6 +286,10 @@ module ScrapeHelper
 
     # One Page Love
     if site_id == 4
+      unless post.url.include?('http')
+        uri = 'http:'+post.url
+      end
+
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
       doc.css('.review-launch a').each do |i|
@@ -297,9 +330,13 @@ module ScrapeHelper
 
     # CSSDSGN
     if site_id == 8
+      unless post.url.include?('http')
+        uri = 'http:'+post.url
+      end
+
       page = URI.parse(uri).read
       doc = Nokogiri::HTML(page, uri, 'utf-8')
-      doc.css('.post-single .one-half')[0].css('.post a').each do |i|
+      doc.css('.post-single > a').each do |i|
         href = i.attribute('href').value
         re = href if href.present?
       end
@@ -322,6 +359,7 @@ module ScrapeHelper
 
     re
   end
+
   def get_wririte_original_image(post)
     re = ''
     uri = post.url
