@@ -4,7 +4,7 @@
 ```
 $ heroku pg:backups capture --app feeeed
 $ heroku pg:backups --app feeeed
-$ curl -o db/latest.dump $(heroku pg:backups public-url b001 --app feeeed)
+$ curl -o db/latest.dump $(heroku pg:backups public-url b007 --app feeeed)
 ```
 
 ## backups -> local
@@ -28,14 +28,4 @@ $ heroku pg:push feeeed_v2_development HEROKU_POSTGRESQL_ROSE_URL --app feeeed
 
 ```
 $ bundle exec rake db:drop db:create db:migrate
-```
-
-```
-SELECT
-    pg_terminate_backend(pid)
-FROM
-    pg_stat_activity
-WHERE
-    pid <> pg_backend_pid()
-    AND datname = 'feeeed_v2_development';
 ```
