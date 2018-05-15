@@ -15,20 +15,6 @@ ActiveRecord::Schema.define(version: 2014_11_05_161231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "clicks", id: :serial, force: :cascade do |t|
-    t.integer "count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "post_id"
-    t.index ["post_id"], name: "index_clicks_on_post_id"
-  end
-
   create_table "posts", id: :serial, force: :cascade do |t|
     t.text "title"
     t.text "description"
