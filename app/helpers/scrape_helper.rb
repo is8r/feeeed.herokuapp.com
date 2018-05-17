@@ -3,6 +3,8 @@ module ScrapeHelper
   require 'parallel'
   require 'nokogiri'
   require 'open-uri'
+  require 'capybara'
+  require 'capybara/poltergeist'
 
   # --------------------------------------------------
   # スケジューラーから実行
@@ -202,11 +204,11 @@ module ScrapeHelper
     # end
 
     # rewrite
-    Parallel.each(posts, in_threads: 1000) {|i|
+    Parallel.each(posts, in_threads: 100) {|i|
       if i[:url_original].nil?
         puts i[:url]
-        puts get_original_url(i)
-        rewrite_post_columns(i)
+        # puts get_original_url(i)
+        puts rewrite_post_columns(i)
       end
     }
 
@@ -276,9 +278,23 @@ module ScrapeHelper
 
     # FWA
     if site_id == 3
-      page = URI.parse(uri).read
-      doc = Nokogiri::HTML(page, uri, 'utf-8')
-      doc.css('#view_site .component_site_item .content .footer .column1 .link a').each do |i|
+      # Capybaraセッションを開始
+      Capybara.register_driver :poltergeist do |app|
+        Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :timeout => 5000 })
+      end
+      session = Capybara::Session.new(:poltergeist)
+      session.driver.headers = {
+        'User-Agent' => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2564.97 Safari/537.36"
+      }
+      session.visit uri
+
+      # 待機
+      sleep 3
+
+      # スクレイピング
+      html = session.html
+      doc = Nokogiri::HTML.parse(html)
+      doc.css('a.case-single__description__button').each do |i|
         href = i.attribute('href').value
         re = href if href.present?
       end

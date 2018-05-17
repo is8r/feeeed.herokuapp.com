@@ -10,21 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2014_11_05_161231) do
+ActiveRecord::Schema.define(version: 2014_03_31_011209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clicks", id: :serial, force: :cascade do |t|
+    t.integer "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "post_id"
+    t.index ["post_id"], name: "index_clicks_on_post_id"
+  end
 
   create_table "posts", id: :serial, force: :cascade do |t|
     t.text "title"
     t.text "description"
     t.text "url"
+    t.text "url_original"
     t.datetime "posted_at"
     t.text "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "site_id"
-    t.text "url_original"
     t.index ["site_id"], name: "index_posts_on_site_id"
   end
 
@@ -35,6 +49,9 @@ ActiveRecord::Schema.define(version: 2014_11_05_161231) do
     t.boolean "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "category_id"
+    t.integer "cid"
+    t.index ["category_id"], name: "index_sites_on_category_id"
   end
 
 end

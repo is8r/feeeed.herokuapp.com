@@ -26,6 +26,8 @@ $ heroku pg:push feeeed_v2_development HEROKU_POSTGRESQL_ROSE_URL --app feeeed
 
 ## 動かなくなった時
 
+一度DBを空にする:
+
 ```
 $ bundle exec rake db:drop db:create db:migrate
 ```
