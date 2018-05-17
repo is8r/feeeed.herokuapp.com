@@ -58,6 +58,7 @@ gem 'nprogress-rails'
 gem 'responders'
 gem 'activesupport'
 gem 'config'
+gem 'poltergeist'
 
 # gem 'devise'
 # gem 'redcarpet'# markdown

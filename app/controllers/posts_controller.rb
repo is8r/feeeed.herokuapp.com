@@ -25,7 +25,7 @@ class PostsController < ApplicationController
 
     # Postをチェックして足りない項目をscrapeしたりいらないクエリを削除したり
     # @items = ApplicationController.helpers.rewrite
-    @items = ApplicationController.helpers.test_rewrite_site_posts(4)
+    @items = ApplicationController.helpers.test_rewrite_site_posts(3)
 
     respond_to do |format|
       format.json { render :json => @items }
